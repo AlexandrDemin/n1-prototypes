@@ -106,7 +106,7 @@
 </head>
 <body>
   <div id="app">
-    <ul>
+    <ul v-if="!submenuShown">
       <li>
         <a class= "list-item display-flex" href="#">
           <span class="home-link">
@@ -125,25 +125,7 @@
         <img class="commerce-ad" src="data:image/png;base64,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">
       </li>
       <li v-for="item in catalogue" v-if="item.children" :key="item.key">
-        <a class= "list-item" v-if="item.url" v-bind:href="item1.url">{{ item.key }}</a>
-        <div v-if="!item.url" v-on:click="toggle_active" v-bind:class="['list-item', item.children ? 'hover' : '']">{{ item.key }}</div>
-        <ul v-if="item.children" class="">
-          <li v-for="item1 in item.children" :key="item1.key">
-            <a class= "list-item" v-if="item1.url" v-bind:href="item1.url">{{ item1.key }}</a>
-            <div v-if="!item1.url" v-on:click="toggle_active" v-bind:class="['list-item', item1.children ? 'hover' : '']">{{ item1.key }}</div>
-            <ul v-if="item1.children" class="">
-              <li v-for="item2 in item1.children" :key="item2.key">
-                <a class= "list-item" v-if="item2.url" v-bind:href="item2.url">{{ item2.key }}</a>
-                <div v-if="!item2.url" v-on:click="toggle_active" v-bind:class="['list-item', item2.children ? 'hover' : '']">{{ item2.key }}</div>
-                <ul v-if="item2.children" class="">
-                  <li v-for="item3 in item2.children" :key="item3.key">
-                    <a class= "list-item" v-bind:href="item3.url">{{ item3.key }}</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
+        <div v-if="!item.url" v-on:click="showChildren" v-bind:class="['list-item', item.children ? 'hover' : '']" :id="item.key">{{ item.key }}</div>
       </li>
       <li>
         <a class= "list-item" href="#">
@@ -192,11 +174,49 @@
         <a class= "list-item" href="#">Техподдержка</a>
       </li>
     </ul>
+    <ul v-if="submenuShown">
+      <li>
+        <div class= "list-item display-flex" v-on:click="hideChildren">
+          <svg width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.7582 0.245543C12.0806 0.572934 12.0806 1.10374 11.7582 1.43113L2.33506 11L11.7582 20.5689C12.0806 20.8963 12.0806 21.4271 11.7582 21.7545C11.4358 22.0818 10.9131 22.0818 10.5907 21.7545L0 11L10.5907 0.245543C10.9131 -0.0818478 11.4358 -0.0818478 11.7582 0.245543Z" fill="#5840CC"/>
+          </svg>
+          <h3>
+            {{submenuModel.header}}
+          </h3>
+          <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.40697 0.241537C1.08503 -0.0805905 0.563146 -0.0805007 0.241315 0.241737C-0.0805164 0.563975 -0.0804267 1.08634 0.241515 1.40846L7.83365 9.00497L0.24425 16.5958C-0.0777534 16.9179 -0.0776638 17.4399 0.24445 17.7619C0.566566 18.0838 1.08873 18.0838 1.41073 17.7617L8.9995 10.1715L16.5862 17.7625C16.9081 18.0847 17.43 18.0846 17.7518 17.7623C18.0736 17.4401 18.0736 16.9177 17.7516 16.5956L10.1656 9.0052L17.7586 1.4108C18.0806 1.08874 18.0805 0.566656 17.7584 0.244703C17.4362 -0.0772513 16.9141 -0.0771616 16.5921 0.244903L8.99973 7.83867L1.40697 0.241537Z" fill="#5840CC"/>
+          </svg>
+        </div>
+      </li>
+      <li><hr></li>
+      <li v-for="item in submenuModel.children" v-if="item.children" :key="item.key">
+        <h3 v-if="!item.url" class="list-item">{{ item.key }}</h3>
+        <a v-if="item.url" class="list-item">{{ item.key }}</a>
+        <ul v-if="item.children">
+          <li v-for="item1 in item.children">
+            <h4 v-if="!item1.url" class="list-item">{{ item1.key }}</h4>
+            <a v-if="item1.url" class="list-item">{{ item1.key }}</a>
+            <ul v-if="item1.children">
+              <li v-for="item2 in item1.children">
+                <a class="list-item" v-bind:href="item2.href">{{ item2.key }}</a>
+                <ul v-if="item2.children">
+                  <li v-for="item3 in item2.children">
+                    <a class="list-item" v-bind:href="item3.href">{{ item3.key }}</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
   </div>
   <script type="text/javascript">
     var app = new Vue({
       el: '#app',
       data: {
+        submenuModel: {},
+        submenuShown: false,
         catalogue: [{
           "key": "Продажа",
           "url": "",
@@ -539,26 +559,24 @@
               "url": "#"
             }]
           }]
-        }, {
-          "key": "Каталоги",
-          "url": "",
-          "children": [{
-            "key": "Жилые комплексы",
-            "url": "#"
-          }, {
-            "key": "Коттеджные поселки",
-            "url": "#"
-          }]
         }]
       },
       methods: {
-        "toggle_active": function (event) {
-          var childrenUl = event.target.parentNode.querySelector("ul")
-          if (childrenUl) {
-            event.target.classList.toggle("active")
-            childrenUl.classList.toggle("hidden")
+        showChildren: function (event) {
+          var t = this.catalogue
+          for (item in t) {
+            if (t[item].key === event.target.id) {
+              console.log(t[item])
+              var data = t[item]
+              this.submenuModel.header = data.key
+              this.submenuModel.children = data.children
+              this.submenuShown = true
+            }
           }
-          event.stopPropagation()
+        },
+        hideChildren: function (event) {
+          this.submenuShown = false
+          this.submenuModel = {}
         }
       }
     })
